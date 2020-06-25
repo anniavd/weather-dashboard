@@ -1,84 +1,115 @@
 var apiKey = "f859703a85a79facc803ec19e50f064c";
 var now = moment().format("(L)"); //object moment
-var weatherDay =document.querySelector("#showCurrentWeather")
+var weatherDay = document.querySelector("#showCurrentWeather")
+var weatherInfo = document.querySelector("#weather-container")
+//elements for show wether data
+var listdata = document.createElement("div")
+var tempS = document.createElement("p");
+var humS = document.createElement("p");
+var windS = document.createElement("p");
+var UVS = document.createElement("p");
 
 
 function searchCurrent(city) {
     console.log("current");
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
-    .then(function (response) {
-        console.log(response);
-        response.json();
+        .then(function (response) {
+            return response.json()
+            // response.json();
+        }).then(function (data) {
+            console.log(data)
 
 
-   
-    });
+            var temperature = data.main.temp;
+            var humidity = data.main.humidity;
+            var windSpeed = data.wind.speed;
+            var coordlat = data.coord.lat;
+            var coordlon = data.coord.lon;
+            
+            //call UV for get that info
+            searchUV(coordlat, coordlon);
 
-   // var temperature=response.main.temp;
-   // console.log(temperature);
-    
-    //show city name and current day
-    var dateCity =document.createElement("p"); //add the icon
-    dateCity.innerHTML= city +" " + now;
+            //display on page the weather data
+           
+            tempS.textContent = " Temperature:" + " " + temperature + " " + "ºF";
+            humS.textContent = " Humidity:" + " " + humidity + " " + "%";
+            windS.textContent = " Wind" + " " + "Speed:" + " " + windSpeed + " " + "MPH";;
 
-    weatherDay.appendChild(dateCity);
+            listdata.appendChild(tempS)
+            listdata.appendChild(humS)
+            listdata.appendChild(windS)
+            weatherInfo.appendChild(listdata)
+
+            //show city name and current day
+            var dateCity = document.createElement("p"); //add the icon
+            dateCity.innerHTML = city + " " + now;
+
+            weatherDay.appendChild(dateCity);
+
+        })
 
 };
+
+//function UV
+
+function searchUV(lat, lon) {
+
+    //console.log("UV");
+    fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
+        .then(function (response) {
+            return response.json()
+        }).then(function (data) {
+            console.log("rayos ultra" + data)
+
+        })
+
+}
+
+//function forecast
 
 function searchForecast(city) {
 
     // buscar y mostrar el 5 dias prevision
-   // var url2 = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
-    console.log("5 days");
+
     fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
-    .then(function (response) {
-        console.log(response);
-        response.json();
-    });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
 
+        })
 }
 
 
-//fuction UV
 
-function searchUV( lat,lon) {
-
-     console.log("UV");
-    fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
-    .then(function (response) {
-        console.log(response);
-        response.json();
-    });
-
-}
 
 
 
 // listener onclick button
 
 document.getElementById("searchC").addEventListener("click", function (event) {
-      event.preventDefault();
+    event.preventDefault();
     var cityIn = document.getElementById("city").value;
 
-    if(cityIn){
-      searchCurrent(cityIn);
-     searchForecast(cityIn);  
-                              //limpiar el input
-    }else{
+    if (cityIn) {
+        searchCurrent(cityIn);
+        searchForecast(cityIn);
+        //limpiar el input
+    } else {
         alert("You need in a City")
     }
-   
+
 })
 
 
-var listCitySearch=function(cities){
+var listCitySearch = function (cities) {
 
-   // for(var i=0; i<cities.lenght.i++){
+    // for(var i=0; i<cities.lenght.i++){
 
-   // }
+    // }
 }
 
-
+// UV necesitas otra llamada basada en las coordenadas
 
 
 
