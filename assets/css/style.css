@@ -1,0 +1,16 @@
+
+ *{
+    box-sizing: border-box;
+  }
+
+.jumbotron{
+  text-align: center;
+  background-color:rgb(56, 55, 55);
+  color: white; 
+  padding: 18px ;
+  margin: 0px 0px 15px;
+}
+ 
+.justify-space-around {
+    justify-content: space-around;
+  }
