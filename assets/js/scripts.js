@@ -10,12 +10,16 @@ var windS = document.createElement("p");
 var UVS = document.createElement("p");
 
 
+// cuando empiezas lees localstorage si vacio creas el array con []
+// si tiene algo lo salva
+// llamas a show the city history
+
 function searchCurrent(city) {
     console.log("current");
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
         .then(function (response) {
             return response.json()
-            // response.json();
+           
         }).then(function (data) {
             console.log(data)
 
@@ -27,6 +31,7 @@ function searchCurrent(city) {
             var coordlon = data.coord.lon;
             
             //call UV for get that info
+            weatherInfo.innerHTML="";
             searchUV(coordlat, coordlon);
 
             //display on page the weather data
@@ -43,27 +48,33 @@ function searchCurrent(city) {
             //show city name and current day
             var dateCity = document.createElement("p"); //add the icon
             dateCity.innerHTML = city + " " + now;
-
+            weatherDay.innerHTML="";
             weatherDay.appendChild(dateCity);
-
+           
         })
-
+       
 };
 
 //function UV
 
 function searchUV(lat, lon) {
-
-    //console.log("UV");
+    console.log(lat,lon)
+   
     fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
         .then(function (response) {
+      
             return response.json()
         }).then(function (data) {
-            console.log("rayos ultra" + data)
-
+            console.log("rayos ultra", data)
+           var ultra=data.value;
+           var ultraS=document.createElement("button");
+           var ultraText=document.createElement("p")
+           ultraS.textContent= parseInt(ultra) ;
+          // ultraText.textContent="UV"+ " " + "Index:" + " " + ultraS;
+           weatherInfo.appendChild(ultraS)
         })
-
 }
+
 
 //function forecast
 
@@ -81,10 +92,6 @@ function searchForecast(city) {
 }
 
 
-
-
-
-
 // listener onclick button
 
 document.getElementById("searchC").addEventListener("click", function (event) {
@@ -92,24 +99,19 @@ document.getElementById("searchC").addEventListener("click", function (event) {
     var cityIn = document.getElementById("city").value;
 
     if (cityIn) {
+        // verificar si existe en el array y si no existe entonce push el el array y salvar en local storage // show the list
         searchCurrent(cityIn);
         searchForecast(cityIn);
         //limpiar el input
     } else {
         alert("You need in a City")
     }
-
+  
 })
 
 
-var listCitySearch = function (cities) {
 
-    // for(var i=0; i<cities.lenght.i++){
 
-    // }
-}
-
-// UV necesitas otra llamada basada en las coordenadas
 
 
 
