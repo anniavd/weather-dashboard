@@ -2,6 +2,7 @@ var apiKey = "f859703a85a79facc803ec19e50f064c";
 var now = moment().format("(L)"); //object moment
 var weatherDay = document.querySelector("#showCurrentWeather")
 var weatherInfo = document.querySelector("#weather-container")
+var total=document.querySelector("#totalInfo")
 //elements for show wether data
 var listdata = document.createElement("div")
 var tempS = document.createElement("p");
@@ -23,6 +24,14 @@ function searchCurrent(city) {
         }).then(function (data) {
             console.log(data)
 
+             //show city name and current day
+             var dateCity = document.createElement("p"); //add the icon
+             dateCity.innerHTML = city + " " + now;
+             weatherDay.innerHTML="";
+             weatherDay.classList="currentStyle"
+             weatherDay.appendChild(dateCity);
+            
+            //get info from API
             var temperature = data.main.temp;
             var humidity = data.main.humidity;
             var windSpeed = data.wind.speed;
@@ -31,26 +40,25 @@ function searchCurrent(city) {
             
            //clear the info
             weatherInfo.innerHTML="";
+            listdata.innerHTML="";
 
-             //call UV for get that info
+             //call UV for get that info passing coords
             searchUV(coordlat, coordlon);
 
             //display on page the weather data
            
             tempS.textContent = " Temperature:" + " " + temperature + " " + "ºF";
             humS.textContent = " Humidity:" + " " + humidity + " " + "%";
-            windS.textContent = " Wind" + " " + "Speed:" + " " + windSpeed + " " + "MPH";;
-            
+            windS.textContent = " Wind" + " " + "Speed:" + " " + windSpeed + " " + "MPH";
+
+            weatherInfo.classList="card"
+
+            listdata.appendChild( weatherDay)
             listdata.appendChild(tempS)
             listdata.appendChild(humS)
-            listdata.appendChild(windS)
+            listdata.appendChild(windS)           
             weatherInfo.appendChild(listdata)
 
-            //show city name and current day
-            var dateCity = document.createElement("p"); //add the icon
-            dateCity.innerHTML = city + " " + now;
-            weatherDay.innerHTML="";
-            weatherDay.appendChild(dateCity);
            
         })
        
@@ -67,11 +75,15 @@ function searchUV(lat, lon) {
             return response.json()
         }).then(function (data) {
             console.log("rayos ultra", data)
+            //get the UV data
            var ultra=data.value;
+
+           //create the button
            var buttonUVEL=document.createElement("button");
            buttonUVEL.classList= "btn";        
            buttonUVEL.textContent= " UV Index: " + ultra;
           
+           //condicional for the conditions are favorable (green), moderate(yellow) or severe(red)
           if (ultra < 3) {
             buttonUVEL.classList.add("btn-success");
           }
@@ -81,8 +93,10 @@ function searchUV(lat, lon) {
           else {
             buttonUVEL.classList.add("btn-danger");
           }
-        
-           weatherInfo.appendChild(buttonUVEL)
+         
+          //display on page the UV data
+           listdata.appendChild(buttonUVEL)
+           weatherInfo.appendChild(listdata)
         })
 }
 
