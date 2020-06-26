@@ -2,7 +2,10 @@ var apiKey = "f859703a85a79facc803ec19e50f064c";
 var now = moment().format("(L)"); //object moment
 var weatherDay = document.querySelector("#showCurrentWeather")
 var weatherInfo = document.querySelector("#weather-container")
-var total=document.querySelector("#totalInfo")
+var daysFore=document.querySelector("#forecast")
+var  divAllDay =document.querySelector("#allday")
+
+//var total=document.querySelector("#totalInfo")
 //elements for show wether data
 var listdata = document.createElement("div")
 var tempS = document.createElement("p");
@@ -16,13 +19,13 @@ var UVS = document.createElement("p");
 // llamas a show the city history
 
 function searchCurrent(city) {
-    console.log("current");
+    
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
         .then(function (response) {
             return response.json()
            
         }).then(function (data) {
-            console.log(data)
+           // console.log(data)
 
              //show city name and current day
              var dateCity = document.createElement("p"); //add the icon
@@ -58,7 +61,6 @@ function searchCurrent(city) {
             listdata.appendChild(humS)
             listdata.appendChild(windS)           
             weatherInfo.appendChild(listdata)
-
            
         })
        
@@ -67,21 +69,21 @@ function searchCurrent(city) {
 //function UV
 
 function searchUV(lat, lon) {
-    console.log(lat,lon)
+   // console.log(lat,lon)
    
     fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
         .then(function (response) {
       
             return response.json()
         }).then(function (data) {
-            console.log("rayos ultra", data)
+           
             //get the UV data
            var ultra=data.value;
 
            //create the button
            var buttonUVEL=document.createElement("button");
            buttonUVEL.classList= "btn";        
-           buttonUVEL.textContent= " UV Index: " + ultra;
+           buttonUVEL.textContent= ultra;
           
            //condicional for the conditions are favorable (green), moderate(yellow) or severe(red)
           if (ultra < 3) {
@@ -93,9 +95,13 @@ function searchUV(lat, lon) {
           else {
             buttonUVEL.classList.add("btn-danger");
           }
-         
+
+          var UVel = document.createElement("div");
+          UVel.innerText = "UV Index:"+" ";
+          UVel.appendChild(buttonUVEL);
+
           //display on page the UV data
-           listdata.appendChild(buttonUVEL)
+           listdata.appendChild(UVel)
            weatherInfo.appendChild(listdata)
         })
 }
@@ -105,17 +111,55 @@ function searchUV(lat, lon) {
 
 function searchForecast(city) {
 
-    // buscar y mostrar el 5 dias prevision
-
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
+       fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+          console.log("forescat",data)
 
-        })
+        //queremos los indices de 4, 12, 20, 28, y 36
+        //nos da la informacion de noon por cada dia
+            console.log("displaying temps");
+      /*  for (var i = 4; i < 37; i += 8) {
+            console.log(data.list[i].main.humidity)
+            console.log(data.list[i].main.temp)
+        }*/
+        var titleforecast=document.createElement("h2")
+        var firstDT=document.createElement("p")
+        var firstDH=document.createElement("p")
+        var container=document.createElement("div")
+
+       // var secondDT=data.list[12].main.humidity;
+       // var secondDH=data.list[12].main.temp;
+        
+        titleforecast.textContent="5-Day Forecast:"
+        container.classList='card text-white bg-primary mb-3" style="max-width: 18rem;'
+        firstDT.textContent = " Temperature:" + " " + data.list[4].main.temp + " " + "ºF";
+        firstDH.textContent = " Humidity:" + " " +data.list[4].main.humidity;+ " " + "%";
+        
+        //show  5 day forecast
+        divAllDay.appendChild(firstDT)  
+        divAllDay.appendChild( firstDH) 
+        container.appendChild(divAllDay)
+           
+        daysFore.appendChild(titleforecast)
+        daysFore.appendChild( container)
+
+
+
+     })
 }
 
+/*
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Primary card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+*/
 
 // listener onclick button
 
