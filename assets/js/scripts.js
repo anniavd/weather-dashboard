@@ -23,15 +23,16 @@ function searchCurrent(city) {
         }).then(function (data) {
             console.log(data)
 
-
             var temperature = data.main.temp;
             var humidity = data.main.humidity;
             var windSpeed = data.wind.speed;
             var coordlat = data.coord.lat;
             var coordlon = data.coord.lon;
             
-            //call UV for get that info
+           //clear the info
             weatherInfo.innerHTML="";
+
+             //call UV for get that info
             searchUV(coordlat, coordlon);
 
             //display on page the weather data
@@ -69,9 +70,9 @@ function searchUV(lat, lon) {
            var ultra=data.value;
            var buttonUVEL=document.createElement("button");
            buttonUVEL.classList= "btn";        
-           buttonUVEL.textContent= " UV Index  " + ultra;
+           buttonUVEL.textContent= " UV Index: " + ultra;
           
-           if (ultra < 3) {
+          if (ultra < 3) {
             buttonUVEL.classList.add("btn-success");
           }
           else if (ultra < 7) {
