@@ -12,9 +12,14 @@
 }
  
 .justify-space-around {
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
- .card h2{
-   font-size: 22px;
+  .card {
+    padding: 30px 20px ;
+  }
+
+ .currentStyle{
+   font-size: 30px;   
+   font-weight: bold;
  }
