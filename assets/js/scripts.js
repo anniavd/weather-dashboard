@@ -39,7 +39,7 @@ function searchCurrent(city) {
             tempS.textContent = " Temperature:" + " " + temperature + " " + "ºF";
             humS.textContent = " Humidity:" + " " + humidity + " " + "%";
             windS.textContent = " Wind" + " " + "Speed:" + " " + windSpeed + " " + "MPH";;
-
+            
             listdata.appendChild(tempS)
             listdata.appendChild(humS)
             listdata.appendChild(windS)
@@ -67,11 +67,21 @@ function searchUV(lat, lon) {
         }).then(function (data) {
             console.log("rayos ultra", data)
            var ultra=data.value;
-           var ultraS=document.createElement("button");
-           var ultraText=document.createElement("p")
-           ultraS.textContent= parseInt(ultra) ;
-          // ultraText.textContent="UV"+ " " + "Index:" + " " + ultraS;
-           weatherInfo.appendChild(ultraS)
+           var buttonUVEL=document.createElement("button");
+           buttonUVEL.classList= "btn";        
+           buttonUVEL.textContent= " UV Index  " + ultra;
+          
+           if (ultra < 3) {
+            buttonUVEL.classList.add("btn-success");
+          }
+          else if (ultra < 7) {
+            buttonUVEL.classList.add("btn-warning");
+          }
+          else {
+            buttonUVEL.classList.add("btn-danger");
+          }
+        
+           weatherInfo.appendChild(buttonUVEL)
         })
 }
 
