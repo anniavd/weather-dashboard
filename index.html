@@ -18,9 +18,10 @@
         <h1 class="display-3  lead">Weather Dashboard</h1>
     </header>
 
-    <main class=" container flex-row "> <!--container-fluid-->
+    <main class=" container-fluid flex-row ">
+        <!--container-fluid-->
         <div class="row ">
-            <div class=" col-12 col-md-3 ">
+            <div class=" col-12 col-md-2 ">
                 <form id="city-form">
                     <div class="form-group">
                         <label for="searchCity">Search for a City:</label>
@@ -32,32 +33,35 @@
                 <div id="listCity list-group"></div>
             </div> <!-- column for Show current weather-->
 
-            <div class="col-12 col-md-9 ">
-                <div id="totalInfo " >
+            <div class="col-12 col-md-10 ">
+                <div id="totalInfo ">
                     <h2 class="subtitle"><span id="showCurrentWeather"></span></h2>
                     <div id="weather-container"></div>
                 </div>
                 <!--5 day forecast-->
-                <div id="forecast" >
-                    <div  id="allday" class="row  ">
-                    <div class="col-md-2  ">
-                       <div  id= "eachday1" > text1</div>  
+                <div >
+                    <h2 id="tittle5" ></h2>
+                    <div id="forecast" >
+                        <div  id="allday" class="row  ">
+                            <div class="col-md-2 ">
+                               <div  id= "eachday1"  class="style"> </div>  
+                            </div>
+                            <div class="col-md-2  ">
+                               <div  id= "eachday2" class="style" > </div>   
+                            </div>                                             
+                            <div class="col-md-2 ">
+                                <div  id= "eachday3" class="style"> </div>  
+                            </div>  
+                            <div class="col-md-2 ">
+                               <div  id= "eachday4" class="style" ></div>  
+                            </div>  
+                            <div class="col-md-2 ">
+                                <div  id= "eachday5" class="style"></div>     
+                            </div>                       
+                             
+                        </div>
+    
                     </div>
-                    <div class="col-md-2 ">
-                      <div  id= "eachday2" > text1</div>   
-                    </div>                                             
-                    <div class="col-md-2 ">
-                       <div  id= "eachday3" >text1 </div>  
-                    </div>  
-                    <div class="col-md-2 ">
-                       <div  id= "eachday4" >text1 </div>  
-                    </div>  
-                    <div class="col-md-1 ">
-                       <div  id= "eachday5" > text1</div>     
-                    </div>                       
-                         
-                    </div>
-
                 </div>
             </div>
         </div>
