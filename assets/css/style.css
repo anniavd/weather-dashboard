@@ -26,3 +26,10 @@
  .input{
    width: 40px;
  }
+  .style p{
+    font-size: 15px;
+    text-align:justify;
+  }
+  .style{
+    border-radius: 5px;
+  }
