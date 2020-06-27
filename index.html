@@ -21,19 +21,22 @@
     <main class=" container-fluid flex-row ">
         <!--container-fluid-->
         <div class="row ">
-            <div class=" col-12 col-md-2 ">
+            <div class=" col-12 col-md-3 ">
                 <form id="city-form">
                     <div class="form-group">
-                        <label for="searchCity">Search for a City:</label>
+                        <h3 for="searchCity">Search for a City:</h3>
                         <input id="city" type="text">
                         <button id="searchC" type="submit" class="btn btn-primary"><span
                                 class="oi oi-magnifying-glass"></span></button>
                     </div>
                 </form>
-                <div id="listCity list-group"></div>
+                <div >
+                  <ul id="listCity" class="list-group">
+                  </ul>
+                </div>
             </div> <!-- column for Show current weather-->
 
-            <div class="col-12 col-md-10 ">
+            <div class="col-12 col-md-9 ">
                 <div id="totalInfo ">
                     <h2 class="subtitle"><span id="showCurrentWeather"></span></h2>
                     <div id="weather-container"></div>
