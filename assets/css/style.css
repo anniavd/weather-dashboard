@@ -15,23 +15,34 @@
     justify-content: space-between;
   }
 
+  /* display style for current weather day (temperature,humidy,speed wind and UV )*/
   .card {
     padding: 30px 20px ;
   }
-
+  .card p {
+  font-size:25px ;
+  }
+ /* display style for current weather day (name city,date )*/
  .currentStyle{
    font-size: 30px;   
    font-weight: bold;
  }
+ 
+ .currentStyle P{
+   font-size: 25px;
+ }
+
  .input{
    width: 40px;
  }
-  .style p{
-    font-size: 15px;
-    text-align:justify;
+ /* display style for 5 day forecast (temp and humidity )*/
+  .forecast p{
+    font-size: 22px;
+    text-align:center;
   }
-  .style{
+  .forecast{
     border-radius: 5px;
+    
   }
   
  
