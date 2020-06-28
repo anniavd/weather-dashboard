@@ -8,10 +8,10 @@ var date3 = moment().add(3, 'days').format("L");
 var date4 = moment().add(4, 'days').format("L");
 var date5 = moment().add(5, 'days').format("L");
 
+// selectors 
 var weatherDay = document.querySelector("#showCurrentWeather")
 var weatherInfo = document.querySelector("#weather-container")
 var listado = document.querySelector("#listCity");
-
 var title = document.querySelector("#tittle5")
 //forecast
 var day1 = document.querySelector("#eachday1")
@@ -20,16 +20,18 @@ var day3 = document.querySelector("#eachday3")
 var day4 = document.querySelector("#eachday4")
 var day5 = document.querySelector("#eachday5")
 
-//var total=document.querySelector("#totalInfo")
-//elements for show wether data
+
+//elements for show weather data
 var listdata = document.createElement("div")
 var tempS = document.createElement("p");
 var humS = document.createElement("p");
 var windS = document.createElement("p");
 var UVS = document.createElement("p");
-
+//array for list cities
 var list = []
 
+
+// show the weather info current day
 
 function searchCurrent(city) {
 
@@ -259,7 +261,6 @@ function searchForecast(city) {
 }
 
 // list of cities
-
 
 var listcities = function (cityIn) {
 
