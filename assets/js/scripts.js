@@ -2,16 +2,16 @@ var apiKey = "f859703a85a79facc803ec19e50f064c";
 //date
 var now = moment().format("(L)"); //object moment
 var date1 = moment().add(1, 'days').format("(L)");
-var date2 = moment().add(2, 'days').format("(L)"); 
-var date3 = moment().add(3, 'days').format("(L)"); 
-var date4 = moment().add(4, 'days').format("(L)"); 
-var date5 = moment().add(5, 'days').format("(L)"); 
+var date2 = moment().add(2, 'days').format("(L)");
+var date3 = moment().add(3, 'days').format("(L)");
+var date4 = moment().add(4, 'days').format("(L)");
+var date5 = moment().add(5, 'days').format("(L)");
 
 var weatherDay = document.querySelector("#showCurrentWeather")
 var weatherInfo = document.querySelector("#weather-container")
 //var daysFore = document.querySelector("#forecast")
 //var divAllDay = document.querySelector("#allday")
-var title= document.querySelector("#tittle5")
+var title = document.querySelector("#tittle5")
 //forecast
 var day1 = document.querySelector("#eachday1")
 //var divTwo = document.querySelector("#two")
@@ -28,8 +28,8 @@ var humS = document.createElement("p");
 var windS = document.createElement("p");
 var UVS = document.createElement("p");
 
-var list=[];
- 
+var list = [];
+
 
 
 function searchCurrent(city) {
@@ -37,17 +37,20 @@ function searchCurrent(city) {
   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function (response) {
       return response.json()
-  
+
     }).then(function (data) {
-       console.log(data)
+      console.log(data)
 
       //show city name and current day
       var dateCity = document.createElement("div"); //add the icon
-      var image=document.createElement("img")
-      var imageUrl="http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      var image = document.createElement("img")
+      var imageUrl = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+      console.log(data.weather[0].icon)
 
       image.setAttribute("src", imageUrl)
-      dateCity.innerHTML = city + " " + now + image ;
+
+      console.log("nombre", city)
+      dateCity.innerHTML = city + " " + now + image;
       weatherDay.innerHTML = "";
       weatherDay.classList = "currentStyle"
       weatherDay.appendChild(dateCity);
@@ -137,65 +140,65 @@ function searchForecast(city) {
     .then(function (data) {
       console.log("forescat", data)
 
-     //create elements
+      //create elements
       var titleforecast = document.createElement("h2")
-      
+
       var firstDT = document.createElement("p")
       var firstDH = document.createElement("p")
-      var time1=document.createElement("h6")
+      var time1 = document.createElement("h6")
       var secDT = document.createElement("p")
       var secDH = document.createElement("p")
-      var time2=document.createElement("h6")
+      var time2 = document.createElement("h6")
       var thiDT = document.createElement("p")
       var thiDH = document.createElement("p")
-      var time3=document.createElement("h6")
+      var time3 = document.createElement("h6")
       var fourDT = document.createElement("p")
       var fourDH = document.createElement("p")
-      var time4=document.createElement("h6")
+      var time4 = document.createElement("h6")
       var fifDT = document.createElement("p")
       var fifDH = document.createElement("p")
-      var time5=document.createElement("h6")
-     // var container = document.createElement("div")
+      var time5 = document.createElement("h6")
+      // var container = document.createElement("div")
 
-      
+
       // tittle for show each day
       titleforecast.textContent = "5-Day Forecast:"
-      
+
       // container.classList='card text-white bg-primary mb-3" style="max-width: 18rem;'
-      time1.textContent=date1;
+      time1.textContent = date1;
       firstDT.textContent = " Temperature:" + " " + data.list[4].main.temp + " " + "ºF";
       firstDH.textContent = " Humidity:" + " " + data.list[4].main.humidity; + " " + "%";
       day1.classList = 'text-white bg-primary  style  ';
 
       //second day
-      time2.textContent=date2;
+      time2.textContent = date2;
       secDT.textContent = " Temperature:" + " " + data.list[12].main.temp + " " + "ºF";
       secDH.textContent = " Humidity:" + " " + data.list[12].main.humidity; + " " + "%";
       day2.classList = ' text-white bg-primary style';
 
       //third day
-      time3.textContent=date3;
+      time3.textContent = date3;
       thiDT.textContent = "Temperature:" + " " + data.list[20].main.temp + " " + "ºF";
       thiDH.textContent = " Humidity:" + " " + data.list[20].main.humidity; + " " + "%";
       day3.classList = 'text-white bg-primary  style';
 
       //fourth day
-      time4.textContent=date4;
+      time4.textContent = date4;
       fourDT.textContent = "Temperature:" + " " + data.list[28].main.temp + " " + "ºF";
       fourDH.textContent = " Humidity:" + " " + data.list[28].main.humidity; + " " + "%";
       day4.classList = 'text-white bg-primary  style';
 
       //fifth day
-      time5.textContent=date5;
+      time5.textContent = date5;
       fifDT.textContent = "Temperature:" + " " + data.list[32].main.temp + " " + "ºF";
       fifDH.textContent = " Humidity:" + " " + data.list[32].main.humidity; + " " + "%";
       day5.classList = 'text-white bg-primary  style';
 
       //show  5 day forecast
-       //clear the info
-      title.textContent=""; day1.textContent="";   day2.textContent=""; day3.textContent="";  day4.textContent="";    day5.textContent="";
-     
-     //display the info
+      //clear the info
+      title.textContent = ""; day1.textContent = ""; day2.textContent = ""; day3.textContent = ""; day4.textContent = ""; day5.textContent = "";
+
+      //display the info
       title.appendChild(titleforecast)
       day1.appendChild(time1)
       day1.appendChild(firstDT)
@@ -216,43 +219,57 @@ function searchForecast(city) {
       day5.appendChild(time5)
       day5.appendChild(fifDT)
       day5.appendChild(fifDH)
-      
-   })
-}
- 
-// list of cities
-var listado=document.querySelector("#listCity");
-var listcities= function(cityIn){
-  
-  var firstC=document.createElement("button")
-  //firstC.classList.add("newbutton")
 
-  firstC.textContent=cityIn;
+    })
+}
+
+// list of cities
+var listado = document.querySelector("#listCity");
+
+var listcities = function (cityIn) {
+
+  var firstC = document.createElement("button")
+  firstC.classList = " list-group-item list-group-item-action";
+
+  firstC.textContent = cityIn;
   listado.appendChild(firstC)
 
 }
 
-/*document.getElementById("listCity").addEventListener("click","button", function (){
- 
-  searchCurrent(this.text);
-  searchForecast(this.text);
-} )*/
+//listener click for the list button cities
 
-// listener onclick button
+document.getElementById("listCity").addEventListener("click", function (event) {
+
+ //call the fuction from the list button cities
+  searchCurrent(event.target.textContent);
+  searchForecast(event.target.textContent);
+})
+
+// listener onclick button for search
 
 document.getElementById("searchC").addEventListener("click", function (event) {
   event.preventDefault();
+
+  //get the value  for seach
   var cityIn = document.getElementById("city").value;
-  listcities(cityIn);  
+  
+  //convert the city name
+  cityIn = cityIn.toUpperCase();
+
+  //call the list cities
+  listcities(cityIn);
+
   if (cityIn) {
+
     list.push(cityIn)
-    localStorage.setItem("name",list);
-    
+    localStorage.setItem("name", list);
+
     searchCurrent(cityIn);
     searchForecast(cityIn);
     //limpiar el input
+
   } else {
-    alert("You need in a City")
+    alert("You need in a City name")
   }
 
 })
