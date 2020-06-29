@@ -35,7 +35,7 @@ var list = []
 
 function searchCurrent(city) {
 
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
@@ -43,7 +43,7 @@ function searchCurrent(city) {
           //show city name and current day
           var dateCity = document.createElement("div"); //add the icon
           var image = document.createElement("img")
-          var imageUrl = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+          var imageUrl = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
 
           image.setAttribute("src", imageUrl)
 
@@ -96,7 +96,7 @@ function searchCurrent(city) {
 function searchUV(lat, lon) {
   // console.log(lat,lon)
 
-  fetch(`http://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
+  fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
     .then(function (response) {
       console.log(response)
       if (response.ok) {
@@ -147,7 +147,7 @@ function searchUV(lat, lon) {
 
 function searchForecast(city) {
 
-  fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
     .then(function (response) {
       if(response.ok){ 
       response.json().then(function (data) {
@@ -184,35 +184,35 @@ function searchForecast(city) {
 
       // container.classList='card text-white bg-primary mb-3" style="max-width: 18rem;'
       time1.textContent = date1;
-      imagen1.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png")
+      imagen1.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png")
       firstDT.textContent = " Temp:" + " " + data.list[4].main.temp + " " + "ºF";
       firstDH.textContent = " Humidity:" + " " + data.list[4].main.humidity + " " + "%";
       day1.classList = 'text-white bg-primary  forecast';
 
       //second day
       time2.textContent = date2;
-      imagen2.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png")
+      imagen2.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png")
       secDT.textContent = " Temp:" + " " + data.list[12].main.temp + " " + "ºF";
       secDH.textContent = " Humidity:" + " " + data.list[12].main.humidity + " " + "%";
       day2.classList = 'text-white bg-primary forecast';
 
       //third day
       time3.textContent = date3;
-      imagen3.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png")
+      imagen3.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png")
       thiDT.textContent = "Temp:" + " " + data.list[20].main.temp + " " + "ºF";
       thiDH.textContent = " Humidity:" + " " + data.list[20].main.humidity + " " + "%";
       day3.classList = 'text-white bg-primary  forecast';
 
       //fourth day
       time4.textContent = date4;
-      imagen4.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png")
+      imagen4.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png")
       fourDT.textContent = "Temp:" + " " + data.list[28].main.temp + " " + "ºF";
       fourDH.textContent = " Humidity:" + " " + data.list[28].main.humidity + " " + "%";
       day4.classList = 'text-white bg-primary  forecast';
 
       //fifth day
       time5.textContent = date5;
-      imagen5.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[32].weather[0].icon + ".png")
+      imagen5.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[32].weather[0].icon + ".png")
       fifDT.textContent = "Temp:" + " " + data.list[32].main.temp + " " + "ºF";
       fifDH.textContent = " Humidity:" + " " + data.list[32].main.humidity + " " + "%";
       day5.classList = 'text-white bg-primary  forecast';
