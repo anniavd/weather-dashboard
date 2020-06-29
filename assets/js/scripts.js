@@ -47,7 +47,6 @@ function searchCurrent(city) {
 
           image.setAttribute("src", imageUrl)
 
-          console.log("nombre", city)
           dateCity.innerHTML = city + " " + now;
           dateCity.appendChild(image)
 
@@ -94,11 +93,11 @@ function searchCurrent(city) {
 //function UV
 
 function searchUV(lat, lon) {
-  // console.log(lat,lon)
+  
 
   fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
     .then(function (response) {
-      console.log(response)
+     
       if (response.ok) {
         response.json().then(function (data) {
 
@@ -151,8 +150,7 @@ function searchForecast(city) {
     .then(function (response) {
       if(response.ok){ 
       response.json().then(function (data) {
-        console.log("forescat", data)
-
+       
        //create elements
       var titleforecast = document.createElement("h2")
 
