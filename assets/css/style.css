@@ -36,6 +36,9 @@
    width: 40px;
  }
  /* display style for 5 day forecast (temp and humidity )*/
+ .dateForecast{
+   text-align: center;
+ }
   .forecast p{
     font-size: 22px;
     text-align:center;
@@ -43,6 +46,12 @@
   .forecast{
     border-radius: 5px;
     
+  }
+  /* image style*/
+  .imgDisplay{
+    display: block ;
+    margin-left: auto; 
+    margin-right: auto
   }
   
  
