@@ -31,14 +31,37 @@ var UVS = document.createElement("p");
 var list = []
 
 
+var ShowLocal= function (){  
+  list=JSON.parse(localStorage.getItem("name"))
+  if(!list){
+    list=[]
+  }
+    listado.innerHTML=" ";
+  for(var i=0; i< list.length;i++){
+    listcities(list[i])
+  }
+
+  
+}
+
+
 // show the weather info current day
 
 function searchCurrent(city) {
-
+  console.log("searchcurr:", city)
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
+
+          if (list.indexOf(city) === -1) {
+            list.push(city)
+            localStorage.setItem("name", JSON.stringify(list));
+      
+            //call for show the cities
+            ShowLocal()
+            
+          }
 
           //show city name and current day
           var dateCity = document.createElement("div"); //add the icon
@@ -145,7 +168,7 @@ function searchUV(lat, lon) {
 //function forecast
 
 function searchForecast(city) {
-
+console.log("serchforecast:",city)
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
     .then(function (response) {
       if(response.ok){ 
@@ -294,20 +317,13 @@ document.getElementById("searchC").addEventListener("click", function (event) {
 
 
   if (cityIn) {
-    if (list.indexOf(cityIn) === -1) {
-      list.push(cityIn)
-      localStorage.setItem("name", JSON.stringify(list));
+     //call for current weather day
+     searchCurrent(cityIn);
 
-      //call the list cities
-      listcities(cityIn)
+     //call for 5 days forecast
+     searchForecast(cityIn);
 
-      //call for current weather day
-      searchCurrent(cityIn);
-
-      //call for 5 days forecast
-      searchForecast(cityIn);
-      
-    }
+  
   }
   else {
     alert("You need in a City name")
@@ -316,7 +332,7 @@ document.getElementById("searchC").addEventListener("click", function (event) {
 })
 
 
-
+ShowLocal();
 
 
 
