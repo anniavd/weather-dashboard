@@ -2,24 +2,15 @@ var apiKey = "f859703a85a79facc803ec19e50f064c";
 //date
 //object moment
 var now = moment().format("(L)");
-var date1 = moment().add(1, 'days').format("L");
-var date2 = moment().add(2, 'days').format("L");
-var date3 = moment().add(3, 'days').format("L");
-var date4 = moment().add(4, 'days').format("L");
-var date5 = moment().add(5, 'days').format("L");
 
 // selectors 
 var weatherDay = document.querySelector("#showCurrentWeather")
 var weatherInfo = document.querySelector("#weather-container")
 var listado = document.querySelector("#listCity");
 var title = document.querySelector("#tittle5")
+var cardEL = document.querySelector("#allday")
 //forecast
 var day1 = document.querySelector("#eachday1")
-var day2 = document.querySelector("#eachday2")
-var day3 = document.querySelector("#eachday3")
-var day4 = document.querySelector("#eachday4")
-var day5 = document.querySelector("#eachday5")
-
 
 //elements for show weather data
 var listdata = document.createElement("div")
@@ -31,17 +22,16 @@ var UVS = document.createElement("p");
 var list = []
 
 
-var ShowLocal= function (){  
-  list=JSON.parse(localStorage.getItem("name"))
-  if(!list){
-    list=[]
+var ShowLocal = function () {
+  list = JSON.parse(localStorage.getItem("name"))
+  if (!list) {
+    list = []
   }
-    listado.innerHTML=" ";
-  for(var i=0; i< list.length;i++){
+  listado.innerHTML = " ";
+  for (var i = 0; i < list.length; i++) {
     listcities(list[i])
   }
 
-  
 }
 
 
@@ -52,15 +42,16 @@ function searchCurrent(city) {
   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function (response) {
       if (response.ok) {
+        console.log(response)
         response.json().then(function (data) {
 
           if (list.indexOf(city) === -1) {
             list.push(city)
             localStorage.setItem("name", JSON.stringify(list));
-      
+
             //call for show the cities
             ShowLocal()
-            
+
           }
 
           //show city name and current day
@@ -104,10 +95,10 @@ function searchCurrent(city) {
         })
       }
       else {
-        alert("error" + "" + response.statusText)
+        alert("Error" + " " + response.statusText)
       }
     }).catch(function (error) {
-      alert("error"+"" + error.statusText)
+      alert("Error" + " " + error.statusText)
     })
 }
 
@@ -116,17 +107,15 @@ function searchCurrent(city) {
 //function UV
 
 function searchUV(lat, lon) {
-  
+
 
   fetch(`https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`)
     .then(function (response) {
-     
+
       if (response.ok) {
         response.json().then(function (data) {
 
-          //get the UV data
-          // var ultra = data.value;
-
+                  
           //create the button
           var buttonUVEL = document.createElement("button");
           buttonUVEL.classList.add("btn");
@@ -155,7 +144,7 @@ function searchUV(lat, lon) {
         })
       }
       else {
-        alert("Error UV " + "" + response.statusText)
+        alert("Error UV " + " " + response.statusText)
       }
 
     }).catch(function (error) {
@@ -165,120 +154,63 @@ function searchUV(lat, lon) {
 
 
 
-//function forecast
+//function  5 forecast
 
 function searchForecast(city) {
-console.log("serchforecast:",city)
+  console.log("serchforecast:", city)
   fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`)
     .then(function (response) {
-      if(response.ok){ 
-      response.json().then(function (data) {
-       
-       //create elements
-      var titleforecast = document.createElement("h2")
+      if (response.ok) {
 
-      var firstDT = document.createElement("p")
-      var firstDH = document.createElement("p")
-      var imagen1 = document.createElement("img")
-      var time1 = document.createElement("h4")
-      var secDT = document.createElement("p")
-      var secDH = document.createElement("p")
-      var time2 = document.createElement("h4")
-      var imagen2 = document.createElement("img")
-      var thiDT = document.createElement("p")
-      var thiDH = document.createElement("p")
-      var time3 = document.createElement("h4")
-      var imagen3 = document.createElement("img")
-      var fourDT = document.createElement("p")
-      var fourDH = document.createElement("p")
-      var time4 = document.createElement("h4")
-      var imagen4 = document.createElement("img")
-      var fifDT = document.createElement("p")
-      var fifDH = document.createElement("p")
-      var time5 = document.createElement("h4")
-      var imagen5 = document.createElement("img")
-      // var container = document.createElement("div")
+        response.json().then(function (data) {
+
+          //create element for the title
+          var titleforecast = document.createElement("h2")
+          //clear the title
+          title.textContent = "";
+
+          // tittle for 5 days forecast
+          titleforecast.textContent = "5-Day Forecast:"
+          title.appendChild(titleforecast)
 
 
-      // tittle for show each day
-      titleforecast.textContent = "5-Day Forecast:"
+          for (var i = 6; i < 39; i += 8) {
 
-      // container.classList='card text-white bg-primary mb-3" style="max-width: 18rem;'
-      time1.textContent = date1;
-      imagen1.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[4].weather[0].icon + ".png")
-      firstDT.textContent = " Temp:" + " " + data.list[4].main.temp + " " + "ºF";
-      firstDH.textContent = " Humidity:" + " " + data.list[4].main.humidity + " " + "%";
-      day1.classList = 'text-white bg-primary  forecast';
+            //create elements for show the info for each day
+            var div = document.createElement("div")
+            var firstDT = document.createElement("p")
+            var firstDH = document.createElement("p")
+            var imagen1 = document.createElement("img")
+            var time1 = document.createElement("h4")
 
-      //second day
-      time2.textContent = date2;
-      imagen2.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[12].weather[0].icon + ".png")
-      secDT.textContent = " Temp:" + " " + data.list[12].main.temp + " " + "ºF";
-      secDH.textContent = " Humidity:" + " " + data.list[12].main.humidity + " " + "%";
-      day2.classList = 'text-white bg-primary forecast';
+            time1.textContent = data.list[i].dt_txt.split(" ")[0];
+            time1.classList="dateForecast";
+            imagen1.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png")
+            imagen1.classList=" imgDisplay ";
+            firstDT.textContent = " Temp:" + " " + data.list[i].main.temp + " " + "ºF";
+            firstDH.textContent = " Humidity:" + " " + data.list[i].main.humidity + " " + "%";
+            div.classList = 'col-md-2 style text-white bg-primary  forecast mr-3 ';
 
-      //third day
-      time3.textContent = date3;
-      imagen3.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[20].weather[0].icon + ".png")
-      thiDT.textContent = "Temp:" + " " + data.list[20].main.temp + " " + "ºF";
-      thiDH.textContent = " Humidity:" + " " + data.list[20].main.humidity + " " + "%";
-      day3.classList = 'text-white bg-primary  forecast';
+            div.appendChild(time1)
+            div.appendChild(imagen1)
+            div.appendChild(firstDT)
+            div.appendChild(firstDH)
+            cardEL.appendChild(div)
 
-      //fourth day
-      time4.textContent = date4;
-      imagen4.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png")
-      fourDT.textContent = "Temp:" + " " + data.list[28].main.temp + " " + "ºF";
-      fourDH.textContent = " Humidity:" + " " + data.list[28].main.humidity + " " + "%";
-      day4.classList = 'text-white bg-primary  forecast';
+          }
 
-      //fifth day
-      time5.textContent = date5;
-      imagen5.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[32].weather[0].icon + ".png")
-      fifDT.textContent = "Temp:" + " " + data.list[32].main.temp + " " + "ºF";
-      fifDH.textContent = " Humidity:" + " " + data.list[32].main.humidity + " " + "%";
-      day5.classList = 'text-white bg-primary  forecast';
+        })
+        //clear the info for the 5 day forescast
+        cardEL.innerHTML = "";
+      }
+      else {
+        alert("Error" + " " + response.statusText)
+      }
 
-      //show  5 day forecast
-      //clear the info
-      title.textContent = ""; day1.textContent = ""; day2.textContent = ""; day3.textContent = ""; day4.textContent = ""; day5.textContent = "";
+    }).catch(function (error) {
 
-      //display the info
-      title.appendChild(titleforecast)
-      day1.appendChild(time1)
-      day1.appendChild(imagen1)
-      day1.appendChild(firstDT)
-      day1.appendChild(firstDH)
-
-      day2.appendChild(time2)
-      day2.appendChild(imagen2)
-      day2.appendChild(secDT)
-      day2.appendChild(secDH)
-
-      day3.appendChild(time3)
-      day3.appendChild(imagen3)
-      day3.appendChild(thiDT)
-      day3.appendChild(thiDH)
-
-      day4.appendChild(time4)
-      day4.appendChild(imagen4)
-      day4.appendChild(fourDT)
-      day4.appendChild(fourDH)
-
-      day5.appendChild(time5)
-      day5.appendChild(imagen5)
-      day5.appendChild(fifDT)
-      day5.appendChild(fifDH)
-
+      alert("Error" + " " + error.statusText)
     })
-  } 
-  else{
-    alert("Error" + " " + response.statusText)
-  }
-
-}).catch( function(error){
-
-  alert("Error" + " " + error.statusText)
-})
 }
 
 // list of cities
@@ -317,13 +249,13 @@ document.getElementById("searchC").addEventListener("click", function (event) {
 
 
   if (cityIn) {
-     //call for current weather day
-     searchCurrent(cityIn);
+    //call for current weather day
+    searchCurrent(cityIn);
 
-     //call for 5 days forecast
-     searchForecast(cityIn);
+    //call for 5 days forecast
+    searchForecast(cityIn);
 
-  
+
   }
   else {
     alert("You need in a City name")
