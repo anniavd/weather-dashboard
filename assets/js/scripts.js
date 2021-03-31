@@ -189,7 +189,7 @@ function searchForecast(city) {
             imagen1.classList=" imgDisplay ";
             firstDT.textContent = " Temp:" + " " + data.list[i].main.temp + " " + "ºF";
             firstDH.textContent = " Humidity:" + " " + data.list[i].main.humidity + " " + "%";
-            div.classList = 'col-md-2 style text-white bg-primary  forecast mr-3 ';
+            div.classList = 'col-md-2 style  forecast mr-3 ';
 
             div.appendChild(time1)
             div.appendChild(imagen1)

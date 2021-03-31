@@ -2,14 +2,24 @@
  *{
     box-sizing: border-box;
   }
+  
 
 .jumbotron{
   text-align: center;
-  background-color:rgb(56, 55, 55);
-  color: white; 
+  background-image: url(../images/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgba(17, 71, 172, 0.384); 
   padding: 18px ;
   margin: 0px 0px 15px;
 }
+
+.lead,#listCity,form h3,#tittle5,.currentStyle{
+   font-family: 'Train One', cursive;
+   color: rgba(17, 71, 172, 0.521); 
+}
+
  
 .justify-space-around {
     justify-content: space-between;
@@ -26,12 +36,17 @@
  .currentStyle{
    font-size: 30px;   
    font-weight: bold;
+  
  }
  
  .currentStyle P{
    font-size: 25px;
  }
 
+ form h3{
+  font-family: 'Train One', cursive;
+  color: rgba(17, 71, 172, 0.384); 
+ }
  .input{
    width: 40px;
  }
@@ -45,13 +60,25 @@
   }
   .forecast{
     border-radius: 5px;
+    padding-bottom: 15px;
+    background-image: url(../images/background.jpg);
     
   }
+  #weather-container{    
+    background-image: url(../images/background.jpg);
+  }
+  #allday{
+    padding-bottom: 20px;
+  }
+
   /* image style*/
   .imgDisplay{
     display: block ;
     margin-left: auto; 
     margin-right: auto
   }
+
+  
+
   
  
