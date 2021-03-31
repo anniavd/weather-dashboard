@@ -66,6 +66,9 @@
   }
   #weather-container{    
     background-image: url(../images/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   #allday{
     padding-bottom: 20px;
